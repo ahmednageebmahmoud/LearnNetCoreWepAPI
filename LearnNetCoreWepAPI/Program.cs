@@ -1,4 +1,6 @@
+using LearnNetCoreWepAPI.BLL.Repositories;
 using LearnNetCoreWepAPI.models;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -11,6 +13,9 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
+builder.Services.AddDbContext<ApplicationDBContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("PC_Windows")));
+
+builder.Services.AddScoped<IRepository<Employee>, EmployeeRepository>();
 
 var app = builder.Build();
 

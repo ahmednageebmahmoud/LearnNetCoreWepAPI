@@ -17,6 +17,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\BLL\LearnNetCoreWepAPI.BLL.csproj" />
     <ProjectReference Include="..\DAL\LearnNetCoreWepAPI.DAL.csproj" />
   </ItemGroup>
 

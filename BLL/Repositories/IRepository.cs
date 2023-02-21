@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
@@ -7,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace LearnNetCoreWepAPI.BLL.Repositories
 {
-    internal interface  IRepository<TE> where TE : class
+    public interface  IRepository<TE> where TE : class
     {
         Task Add(TE entity);
         Task AddRange(IEnumerable<TE> entities);
@@ -32,5 +33,10 @@ namespace LearnNetCoreWepAPI.BLL.Repositories
 
         Task<List<TE>> SearchBy(Expression<Func<TE, bool>> predicate, params Expression<Func<TE, object>>[] includes);
         Task<TE> FindBy(Expression<Func<TE, bool>> predicate, params Expression<Func<TE, object>>[] includes);
+
+
+
+        public Task<bool> Save();
+        public int SaveChanges();
     }
 }

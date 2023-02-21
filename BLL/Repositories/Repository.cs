@@ -36,18 +36,7 @@ namespace LearnNetCoreWepAPI.BLL.Repositories
 
         }
 
-        //public virtual async Task<bool> Add(TE entity)
-        //{
-        //    try
-        //    {
-        //        _entities.Add(entity);
-        //        return await Task.FromResult(true);
-        //    }
-        //    catch (Exception)
-        //    {
-        //        return await Task.FromResult(false);
-        //    }
-        //}
+  
 
         public async virtual Task AddRange(IEnumerable<TE> entities)
         {
@@ -206,6 +195,9 @@ namespace LearnNetCoreWepAPI.BLL.Repositories
                 return await Task.FromResult(false);
             }
         }
+
+        public async Task<bool> Save() => await _context.SaveChangesAsync() > 0;
+        public int SaveChanges() => _context.SaveChanges();
 
     }
 
