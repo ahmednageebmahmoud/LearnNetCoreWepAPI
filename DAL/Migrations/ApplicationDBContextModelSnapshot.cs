@@ -45,7 +45,7 @@ namespace LearnNetCoreWepAPI.DAL.Migrations
 
                     b.HasIndex("EmployeeId");
 
-                    b.ToTable("Post");
+                    b.ToTable("Post", (string)null);
                 });
 
             modelBuilder.Entity("LearnNetCoreWepAPI.models.Employee", b =>
@@ -66,7 +66,7 @@ namespace LearnNetCoreWepAPI.DAL.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Employees");
+                    b.ToTable("Employees", (string)null);
                 });
 
             modelBuilder.Entity("LearnNetCoreWepAPI.DAL.models.Post", b =>
