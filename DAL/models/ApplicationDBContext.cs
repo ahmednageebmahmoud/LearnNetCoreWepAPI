@@ -24,11 +24,9 @@ namespace LearnNetCoreWepAPI.models
         {
             new EmployeeConfigration().Configure(modelBuilder.Entity<Employee>());
 
-            //Ignor Entity From Migration
-            modelBuilder.Ignore<Media>();
+            //Ignor Entity From Migration modelBuilder.Ignore<Media>();
 
-            //To Stop Listen Changes On Entity(Stop Migration To This Table Not Remove From DB)
-            modelBuilder.Entity<Post>().ToTable("Posts", p => p.ExcludeFromMigrations());
+            //To Stop Listen Changes On Entity(Stop Migration To This Table Not Remove From DB) modelBuilder.Entity<Post>().ToTable("Posts", p => p.ExcludeFromMigrations());
         }
         public DbSet<Employee> Employees { get; set; }
 

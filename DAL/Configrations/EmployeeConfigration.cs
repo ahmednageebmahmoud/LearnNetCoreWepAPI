@@ -21,6 +21,9 @@ namespace LearnNetCoreWepAPI.DAL.Configrations
             builder.Property(c => c.Age)
                 .IsRequired(true);
 
+            //Rename Table In DB builder.ToTable("OurEmployees");
+
+
         }
     }
 }
