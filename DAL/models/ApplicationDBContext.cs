@@ -1,4 +1,5 @@
 ﻿
+using LearnNetCoreWepAPI.DAL.Configrations;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Options;
@@ -9,15 +10,19 @@ namespace LearnNetCoreWepAPI.models
     {
         public ApplicationDBContext(DbContextOptions<ApplicationDBContext> options) : base(options) { }
 
-        //string ConnectionString= @"Data Source=DESKTOP-PCI8IKG;Initial Catalog=LearnNetCoreWepAPI;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False";
+        string ConnectionString = @"Data Source=DESKTOP-PCI8IKG;Initial Catalog=LearnNetCoreWepAPI;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False";
 
-        //protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        //{
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        {
 
-        //    //Read Connection String From Appsetting.json
-        //    optionsBuilder.UseSqlServer(ConnectionString);
-        //}
+            //Read Connection String From Appsetting.json
+            optionsBuilder.UseSqlServer(ConnectionString);
+        }
 
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            new EmployeeConfigration().Configure(modelBuilder.Entity<Employee>());
+        }
         public DbSet<Employee> Employees { get; set; }
 
     }
