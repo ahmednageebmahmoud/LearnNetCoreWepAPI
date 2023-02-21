@@ -20,6 +20,7 @@ namespace LearnNetCoreWepAPI.DAL.Configrations
 
             builder.Property(c => c.Age)
                 .IsRequired(true);
+
         }
     }
 }

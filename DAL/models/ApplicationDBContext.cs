@@ -1,5 +1,6 @@
 ﻿
 using LearnNetCoreWepAPI.DAL.Configrations;
+using LearnNetCoreWepAPI.DAL.models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Options;
@@ -22,6 +23,9 @@ namespace LearnNetCoreWepAPI.models
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             new EmployeeConfigration().Configure(modelBuilder.Entity<Employee>());
+
+            //Ignor Entity From Migration
+            modelBuilder.Ignore<Media>();
         }
         public DbSet<Employee> Employees { get; set; }
 
