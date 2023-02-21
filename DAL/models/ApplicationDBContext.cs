@@ -26,6 +26,7 @@ namespace LearnNetCoreWepAPI.models
 
             //Add Default Schema modelBuilder.HasDefaultSchema("HR");
             //Ignor Entity From Migration modelBuilder.Ignore<Media>();
+            //Ignor Property From Migration modelBuilder.Entity<Media>().Ignore(c=> c.FileURL);
             //To Stop Listen Changes On Entity(Stop Migration To This Table Not Remove From DB) modelBuilder.Entity<Post>().ToTable("Posts", p => p.ExcludeFromMigrations());
         }
         public DbSet<Employee> Employees { get; set; }
