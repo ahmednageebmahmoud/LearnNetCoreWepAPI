@@ -21,6 +21,7 @@ namespace LearnNetCoreWepAPI.DAL.Configrations
             builder.Property(c => c.Age)
                 .IsRequired(true);
 
+            //Change Column Type builder.Property(c => c.Age) .HasColumnType("float");
             //Rename Column Name builder.Property(c => c.Age) .HasColumnName("AgeFix");
             //Rename Table In DB builder.ToTable("OurEmployees");
             //Change Table Schema   builder.ToTable("Employeed", schema: "emps");
