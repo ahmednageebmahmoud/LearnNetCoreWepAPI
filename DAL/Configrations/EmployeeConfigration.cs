@@ -22,8 +22,7 @@ namespace LearnNetCoreWepAPI.DAL.Configrations
                 .IsRequired(true);
 
             //Rename Table In DB builder.ToTable("OurEmployees");
-
-
+            //Change Table Schema   builder.ToTable("Employeed", schema: "emps");
         }
     }
 }
