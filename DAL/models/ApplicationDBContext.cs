@@ -24,6 +24,14 @@ namespace LearnNetCoreWepAPI.models
         {
             new EmployeeConfigration().Configure(modelBuilder.Entity<Employee>());
 
+
+            //Create Sequence With One Or More Table
+         //   modelBuilder.HasSequence<int>("RegisterNo").StartsAt(5).IncrementsBy(9);
+         //   modelBuilder.Entity<Employee>().Property(c => c.UserRegisterNO).HasDefaultValueSql("NEXT VALUE FOR RegisterNo");
+         //   modelBuilder.Entity<Student>().Property(c => c.UserRegisterNO).HasDefaultValueSql("NEXT VALUE FOR RegisterNo");
+
+
+
             //Add Default Schema modelBuilder.HasDefaultSchema("HR");
             //Ignor Entity From Migration modelBuilder.Ignore<Media>();
             //Ignor Property From Migration modelBuilder.Entity<Media>().Ignore(c=> c.FileURL);
