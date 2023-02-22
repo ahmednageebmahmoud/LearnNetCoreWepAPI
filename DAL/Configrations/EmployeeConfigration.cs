@@ -19,12 +19,10 @@ namespace LearnNetCoreWepAPI.DAL.Configrations
          public void Configure(EntityTypeBuilder<Employee> builder)
         {
 
-            builder.Property(c => c.Age)
-                .IsRequired(true);
+            //builder.Property(c => c.Age) .IsRequired(true);
 
             //Create Index Unique
-            builder.HasIndex(c=> new{ c.Age,c.Name })
-                .IsUnique();
+            //builder.HasIndex(c=> new{ c.Age,c.Name }).IsUnique();
 
 
             //One To One Relation

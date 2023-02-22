@@ -26,9 +26,9 @@ namespace LearnNetCoreWepAPI.models
 
 
             //Create Sequence With One Or More Table
-         //   modelBuilder.HasSequence<int>("RegisterNo").StartsAt(5).IncrementsBy(9);
-         //   modelBuilder.Entity<Employee>().Property(c => c.UserRegisterNO).HasDefaultValueSql("NEXT VALUE FOR RegisterNo");
-         //   modelBuilder.Entity<Student>().Property(c => c.UserRegisterNO).HasDefaultValueSql("NEXT VALUE FOR RegisterNo");
+            modelBuilder.HasSequence<int>("RegisterNo").StartsAt(5).IncrementsBy(9);
+            modelBuilder.Entity<Employee>().Property(c => c.UserRegisterNO).HasDefaultValueSql("NEXT VALUE FOR RegisterNo");
+            modelBuilder.Entity<Student>().Property(c => c.UserRegisterNO).HasDefaultValueSql("NEXT VALUE FOR RegisterNo");
 
 
 
