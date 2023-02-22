@@ -28,6 +28,22 @@ namespace LearnNetCoreWepAPI.models
             //Ignor Entity From Migration modelBuilder.Ignore<Media>();
             //Ignor Property From Migration modelBuilder.Entity<Media>().Ignore(c=> c.FileURL);
             //To Stop Listen Changes On Entity(Stop Migration To This Table Not Remove From DB) modelBuilder.Entity<Post>().ToTable("Posts", p => p.ExcludeFromMigrations());
+
+            //Meny To Meny 
+            modelBuilder.Entity<Post>()
+                .HasMany(c => c.Medias)
+                .WithMany(c => c.Posts)
+                .UsingEntity<PostMedia>(
+
+                p=> p.HasOne(c=> c.Media)
+                .WithMany(c=> c.PostMedias)
+                .HasForeignKey(c=> c.MediaId),
+
+                p => p.HasOne(c => c.Post)
+                .WithMany(c => c.PostMedias)
+                .HasForeignKey(c => c.PostId)
+                );
+
         }
         public DbSet<Employee> Employees { get; set; }
 

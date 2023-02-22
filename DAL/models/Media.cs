@@ -13,5 +13,8 @@ namespace LearnNetCoreWepAPI.DAL.models
         public string FileURL { get; set; }
         public int EmpoId { get; set; }
         public Employee  Employee{ get; set; }
+
+        public ICollection<Post> Posts{ get; set; }
+        public List<PostMedia> PostMedias { get; set; }
     }
 }
