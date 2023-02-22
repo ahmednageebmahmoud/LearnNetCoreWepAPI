@@ -30,6 +30,7 @@ namespace LearnNetCoreWepAPI.models
             //To Stop Listen Changes On Entity(Stop Migration To This Table Not Remove From DB) modelBuilder.Entity<Post>().ToTable("Posts", p => p.ExcludeFromMigrations());
 
             //Meny To Meny 
+            /*
             modelBuilder.Entity<Post>()
                 .HasMany(c => c.Medias)
                 .WithMany(c => c.Posts)
@@ -42,7 +43,9 @@ namespace LearnNetCoreWepAPI.models
                 p => p.HasOne(c => c.Post)
                 .WithMany(c => c.PostMedias)
                 .HasForeignKey(c => c.PostId)
-                );
+                );*/
+
+
 
         }
         public DbSet<Employee> Employees { get; set; }

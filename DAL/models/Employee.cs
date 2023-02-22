@@ -7,7 +7,7 @@ namespace LearnNetCoreWepAPI.models
     {
         public int Id { get; set; }
         public string Name { get; set; }
-        public Nullable<int> Age { get; set; }
+        public int Age { get; set; }
 
       public List<Post> Posts{ get; set; }
       public Media Media { get; set; }
