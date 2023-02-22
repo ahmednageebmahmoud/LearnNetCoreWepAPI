@@ -22,8 +22,10 @@ namespace LearnNetCoreWepAPI.DAL.Configrations
             builder.Property(c => c.Age)
                 .IsRequired(true);
 
-            //Create Index
-            builder.HasIndex(c=> new{ c.Age,c.Name });
+            //Create Index Unique
+            builder.HasIndex(c=> new{ c.Age,c.Name })
+                .IsUnique();
+
 
             //One To One Relation
             builder
