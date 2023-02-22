@@ -1,4 +1,4 @@
-﻿using LearnNetCoreWepAPI.DAL.models;
+﻿
 using LearnNetCoreWepAPI.models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
@@ -26,10 +26,10 @@ namespace LearnNetCoreWepAPI.DAL.Configrations
 
 
             //One To One Relation
-            builder
-                .HasOne(c => c.Media)
-                .WithOne(c => c.Employee)
-                .HasForeignKey<Media>(c => c.EmpoId);
+           // builder
+           //     .HasOne(c => c.Media)
+           //     .WithOne(c => c.Employee)
+           //     .HasForeignKey<Media>(c => c.EmpoId);
 
             //Change Column Max Length builder.Property(c => c.Name).HasMaxLength(200);
             //Change Column Type builder.Property(c => c.Age) .HasColumnType("float");

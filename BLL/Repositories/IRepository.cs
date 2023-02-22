@@ -10,6 +10,7 @@ namespace LearnNetCoreWepAPI.BLL.Repositories
 {
     public interface  IRepository<TE> where TE : class
     {
+          DbSet<TE> _entities { get; }
         Task Add(TE entity);
         Task AddRange(IEnumerable<TE> entities);
         Task AddRange(List<TE> entities);
@@ -36,7 +37,7 @@ namespace LearnNetCoreWepAPI.BLL.Repositories
 
 
 
-        public Task<bool> Save();
-        public int SaveChanges();
+          Task<bool> Save();
+          int SaveChanges();
     }
 }

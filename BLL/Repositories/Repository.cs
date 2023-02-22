@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using LearnNetCoreWepAPI.models;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,10 +12,11 @@ namespace LearnNetCoreWepAPI.BLL.Repositories
 {
     public class Repository<TE> : IRepository<TE> where TE : class
     {
-        protected readonly DbContext _context;
-        protected readonly DbSet<TE> _entities;
+        protected readonly ApplicationDBContext _context;
+        public   DbSet<TE> _entities { get; }
 
-        public Repository(DbContext context)
+ 
+        public Repository(ApplicationDBContext context)
         {
             _context = context;
             _entities = context.Set<TE>();
