@@ -23,7 +23,7 @@ namespace LearnNetCoreWepAPI.DAL.Configrations
                 .IsRequired(true);
 
             //Create Index
-            builder.HasIndex(c=> c.Age);
+            builder.HasIndex(c=> new{ c.Age,c.Name });
 
             //One To One Relation
             builder
