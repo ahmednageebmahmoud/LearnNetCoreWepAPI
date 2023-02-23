@@ -14,23 +14,30 @@ namespace LearnNetCoreWepAPI.Controllers
         public IRepository<Employee> _Entity;
         public EmployeeController(IRepository<Employee> entity)
         {
-            this._Entity = entity;
+            db = entity;
         }
 
         [HttpPost(Name ="Add")]
         public async Task<string> AddEmployee([FromBody] EployeeDTO emp)
         {
-           await this._Entity.Add(new Employee{Name=emp.Name});
-        var IsDone=await    this._Entity.Save();
-            return IsDone?"Addedd Successfully":"Some Error Has Been";
+            return false?"Addedd Successfully":"Some Error Has Been";
         
         }
 
         [HttpGet]
         public async Task<Employee> FindEmployee()
         {
-           var Emp= this._Entity._entities.FirstOrDefault();
-            return Emp;
+            db.Users.Find(who); 
+            db.Entry(user)
+                    .Collection(u => u.Connections)
+                    .Query()
+                    .Where(c => c.Connected == true)
+                    .Load();
+
+
+            db._entities.MinBy(c => c.Age);
+
+            return null;
         }
     }
 }

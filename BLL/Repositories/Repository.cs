@@ -12,7 +12,7 @@ namespace LearnNetCoreWepAPI.BLL.Repositories
 {
     public class Repository<TE> : IRepository<TE> where TE : class
     {
-        protected readonly ApplicationDBContext _context;
+        protected   ApplicationDBContext _context { get; }
         public   DbSet<TE> _entities { get; }
 
  

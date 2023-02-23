@@ -19,7 +19,7 @@ update-migration
 
 Transaction Example
 ```
-using var Tran = this._Entity._context.Database.BeginTransaction();
+using var Tran = db._context.Database.BeginTransaction();
     
 // Yet another piece of code...
    
@@ -31,7 +31,7 @@ Tran.Rollback();
 ```
 Example of a Transaction with a Save Point
 ```
-using var TranPointEX = this._Entity._context.Database.BeginTransaction();
+using var TranPointEX = db._context.Database.BeginTransaction();
 // Yet another piece of code...
    
 // Make and Commit to Poutine
@@ -140,3 +140,98 @@ Model Builder: Stop Listening To Changes On Entity (Stop Migration To This Table
 ```
 modelBuilder.Entity<Post>().ToTable("Posts", p => p.ExcludeFromMigrations());
 ```
+
+## EF Quireis
+Bulk Delete: extension method let you delete a large number of entities in your database without load them in app
+ ```
+//Example 1 Delete All Entites
+db._entities
+    .ExecuteDelete();
+
+//Example 2 Delete All Entites Wehre Age Greater Than 50
+db._entities
+    .Where(c => c.Age > 50)
+    .ExecuteDelete();
+
+//Example 3 Skip First 90 Entity And Delete Another
+db._entities
+    .Skip(90)
+    .ExecuteDelete();
+ ```
+
+Bulk Update: extension method let you update a large number of entities in your database without load them in app
+```
+//Example 1 Update All Entites
+db._entities
+    .ExecuteUpdate(e=> 
+    e.SetProperty(p=> p.FullName,p=> p.FirstName+" "+p.LastName));
+
+//Example 2 Update All Entites Wehre Age Greater Than 50
+db._entities
+    .Where(c => c.Age > 50)
+    .ExecuteUpdate(e => 
+        e.SetProperty(p => p.FullName, p => p.FirstName + " " + p.LastName));
+
+//Example 3 Skip First 90 Entity And Update Another
+db._entities
+    .Skip(90)
+    .ExecuteUpdate(e => 
+        e.SetProperty(p => p.FullName, p => p.FirstName + " " + p.LastName));
+```
+
+Loading Related Data: Eager Loading
+```
+//Include: Load Auther Entity With Each Book
+db.book
+    .Include(c => c.Auther)
+    .ToList();
+
+//ThenInclude: Load Auther Entity And Load Auther Address Entity With Each Book
+db.book
+    .Include(c => c.Auther)
+    .ThenInclude(c => c.Address)
+    .ToList();
+
+//Microsoft Documentation Example
+var blogs = context.Blogs
+        .Include(blog => blog.Posts)
+        .ThenInclude(post => post.Author)
+        .ThenInclude(author => author.Photo)
+        .Include(blog => blog.Owner)
+        .ThenInclude(owner => owner.Photo)
+        .ToList();
+```
+
+Loading Related Data: Explicit Loading You can also explicitly load a navigation property by executing a separate query that returns the related entities. If change tracking is enabled, then when a query materializes an entity, EF Core will automatically set the navigation properties of the newly-loaded entity to refer to any entities already loaded, and set the navigation properties of the already-loaded entities to refer to the newly loaded entity.
+```
+var userNeedDisplyBlogPosts=false;
+var blogXXXZZZYYY=db.Blogs.Find(6); 
+
+if(userNeedDisplyBlogPosts)
+{
+    db.Entry(blogXXXZZZYYY)
+        .Collection(u => u.Posts)
+        .Query()
+        .Where(c => c.PostIsActive == true)
+        .Load();
+}
+```
+
+Loading Related Data: Lazy Loading
+```
+//First Install The Package
+Microsoft.EntityFrameworkCore.Proxies
+
+//Second User Extiontion Method In OnConfiguring
+protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+    => optionsBuilder
+        .UseLazyLoadingProxies() // Important
+        .UseSqlServer(myConnectionString);
+
+//Make certain that your collection is essential, such as 
+public virtual ICollection<Post> Posts { get; set; }
+```
+    
+  
+ 
+        
