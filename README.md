@@ -48,30 +48,37 @@ Entity Builder: Create an Index
 ```
 builder.HasIndex(c=> new{ c.Age,c.Name })
 ```
+
 Entity Builder: Create an Unique Index  
 ```
 builder.HasIndex(c=> new{ c.Age,c.Name }).IsUnique();
 ```
+
 Entity Builder: Change Column Max Length 
 ```
 builder.Property(c => c.Name).HasMaxLength(200);
 ```
+
 Entity Builder: Change Column Type 
 ```
 builder.Property(c => c.Age) .HasColumnType("float");
 ```
+
 Entity Builder: Rename column name
 ```
 builder.Property(c => c.Age) .HasColumnName("AgeFix");
 ```
+
 Entity Builder: Rename Table In DB 
 ```
 builder.ToTable("OurEmployees");
 ```
+
 Entity Builder: Change Table Schema
 ```
 builder.ToTable("Employeed", schema: "emps");
 ```
+
 Entity Builder: One-to-One Relationship
 ```
 builder
@@ -79,6 +86,7 @@ builder
     .WithOne(c => c.Employee)
     .HasForeignKey<Media>(c => c.EmpoId);
 ```
+
 Entity Builder: Many-to-Many Relationship
 ```
 modelBuilder.Entity<Post>()
@@ -117,16 +125,18 @@ Model Builder: Add Default Schema
 ```
 modelBuilder.HasDefaultSchema("HR");
 ```
+
 Model Builder: Ignor Entity From Migration 
 ```
 modelBuilder.Ignore<Media>();
 ```
+
 Model Builder: Ignor Property From Migration
 ```
 modelBuilder.Entity<Media>().Ignore(c=> c.FileURL);
-```   
+```  
+
 Model Builder: Stop Listening To Changes On Entity (Stop Migration To This Table, Do Not Remove From Database)
 ```
 modelBuilder.Entity<Post>().ToTable("Posts", p => p.ExcludeFromMigrations());
 ```
-            
