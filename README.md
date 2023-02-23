@@ -141,7 +141,7 @@ Model Builder: Stop Listening To Changes On Entity (Stop Migration To This Table
 modelBuilder.Entity<Post>().ToTable("Posts", p => p.ExcludeFromMigrations());
 ```
 
-## EF Quireis
+## EF Queries
 Bulk Delete: extension method let you delete a large number of entities in your database without load them in app
  ```
 //Example 1 Delete All Entites
