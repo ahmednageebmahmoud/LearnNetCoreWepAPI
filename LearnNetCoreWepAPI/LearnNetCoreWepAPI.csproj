@@ -1,4 +1,4 @@
-﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+<Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup>
     <TargetFramework>net6.0</TargetFramework>
@@ -21,6 +21,10 @@
     <ProjectReference Include="..\BLL\LearnNetCoreWepAPI.BLL.csproj" />
     <ProjectReference Include="..\DAL\LearnNetCoreWepAPI.DAL.csproj" />
     <ProjectReference Include="..\LearnNetCoreWepAPI.Authorization\LearnNetCoreWepAPI.Authorization.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Controllers\" />
   </ItemGroup>
 
 </Project>

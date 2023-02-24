@@ -1,5 +1,5 @@
 
-# # ASP.NET Core With EF Core Examples
+# # ASP.NET Core Integration With JWT
 
 This class library create to manage authorizations.
 
