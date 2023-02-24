@@ -145,16 +145,16 @@ modelBuilder.Entity<Post>().ToTable("Posts", p => p.ExcludeFromMigrations());
 Bulk Delete: extension method let you delete a large number of entities in your database without load them in app
  ```
 //Example 1 Delete All Entites
-db.Employee
+db._entities
     .ExecuteDelete();
 
 //Example 2 Delete All Entites Wehre Age Greater Than 50
-db.Employee
+db._entities
     .Where(c => c.Age > 50)
     .ExecuteDelete();
 
 //Example 3 Skip First 90 Entity And Delete Another
-db.Employee
+db._entities
     .Skip(90)
     .ExecuteDelete();
  ```
@@ -162,18 +162,18 @@ db.Employee
 Bulk Update: extension method let you update a large number of entities in your database without load them in app
 ```
 //Example 1 Update All Entites
-db.Employee
+db._entities
     .ExecuteUpdate(e=> 
     e.SetProperty(p=> p.FullName,p=> p.FirstName+" "+p.LastName));
 
 //Example 2 Update All Entites Wehre Age Greater Than 50
-db.Employee
+db._entities
     .Where(c => c.Age > 50)
     .ExecuteUpdate(e => 
         e.SetProperty(p => p.FullName, p => p.FirstName + " " + p.LastName));
 
 //Example 3 Skip First 90 Entity And Update Another
-db.Employee
+db._entities
     .Skip(90)
     .ExecuteUpdate(e => 
         e.SetProperty(p => p.FullName, p => p.FirstName + " " + p.LastName));
