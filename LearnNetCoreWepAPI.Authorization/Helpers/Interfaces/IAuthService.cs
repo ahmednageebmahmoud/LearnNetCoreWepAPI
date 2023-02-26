@@ -5,10 +5,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace LearnNetCoreWepAPI.BLL.Services
+namespace LearnNetCoreWepAPI.Authorization.Helpers.Interfaces
 {
     public interface IAuthService
     {
         Task<AuthModel> Register(RegisterModel register);
+        Task<AuthModel> Login(LoginModel login);
     }
 }

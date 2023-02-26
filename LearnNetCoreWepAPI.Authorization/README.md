@@ -141,3 +141,34 @@ builder.Services.AddAuthentication(options =>
     };
 });
 ```
+
+Generate JWT Token
+```
+       var Roles = await _userManger.GetRolesAsync(user);
+            var UserClimes = await _userManger.GetClaimsAsync(user);
+
+            foreach (var role in Roles)
+            {
+                UserClimes.Add(new Claim("roles", role));
+            }
+
+            var Clamis = new[]
+            {
+                new Claim(JwtRegisteredClaimNames.Sub,user.UserName),
+                new Claim(JwtRegisteredClaimNames.Email,user.Email),
+                new Claim(JwtRegisteredClaimNames.Jti,Guid.NewGuid().ToString()),
+            new Claim("uid",user.Id)
+            }.Union(UserClimes);
+
+            var SymmetricSecurityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(this._jwt.Key));
+            var SigningCredentials = new SigningCredentials(SymmetricSecurityKey, SecurityAlgorithms.HmacSha256);
+            var Token = new JwtSecurityToken(
+                issuer: this._jwt.Issure,
+                audience: this._jwt.Audince,
+                claims: Clamis,
+                expires: DateTime.Now.AddDays(this._jwt.DurationDays),
+                signingCredentials: SigningCredentials
+            );
+            return new JwtSecurityTokenHandler().WriteToken(Token);
+```
+

@@ -7,6 +7,9 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Identity;
 using LearnNetCoreWepAPI.DAL.models;
 using LearnNetCoreWepAPI.DAL.Helpers;
+using LearnNetCoreWepAPI.Authorization.Helpers.Interfaces;
+using LearnNetCoreWepAPI.Authorization.Services;
+using System.IdentityModel.Tokens.Jwt;
 
 namespace LearnNetCoreWepAPI.BLL.Services
 {
@@ -14,9 +17,11 @@ namespace LearnNetCoreWepAPI.BLL.Services
     {
 
         private readonly UserManager<ApplicationUser> _userManger;
-        public AuthService(UserManager<ApplicationUser> userManger)
+        private readonly IJWTService _jwtService;
+        public AuthService(UserManager<ApplicationUser> userManger, IJWTService authService)
         {
             _userManger = userManger;
+            _jwtService = authService;
         }
 
 
@@ -27,7 +32,7 @@ namespace LearnNetCoreWepAPI.BLL.Services
                 return new AuthModel { Message = "Email Is Alredy Used" };
 
             //Check From UserName
-            if (await this._userManger.FindByEmailAsync(register.UserName) is not null)
+            if (await this._userManger.FindByNameAsync(register.UserName) is not null)
                 return new AuthModel { Message = "UserName Is Alredy Used" };
 
             var User = new ApplicationUser
@@ -49,12 +54,37 @@ namespace LearnNetCoreWepAPI.BLL.Services
             if (!Result.Succeeded)
                 return new AuthModel { Message = String.Join("m", Result.Errors.Select(c => c.Description).ToList()) };
 
+            //Create JWT Token
+            var Token = await this._jwtService.Create(User);
             return new AuthModel
             {
                 Message = "User Register Successfully",
                 IsAuthenticated = true,
-                Roles = new List<string> { RoleConsts.UserRole }
+                Roles = new List<string> { RoleConsts.UserRole },
+                Token = Token
             };
         }
+
+        public async Task<AuthModel> Login(LoginModel login)
+        {
+
+            var User = await this._userManger.FindByNameAsync(login.UserName);
+
+            //Check From UserName And Password
+           if(User is   null || !(await _userManger.CheckPasswordAsync(User,login.Password)))
+                return new AuthModel { Message = "User Name Or Password Is Incorrect" };
+
+            //Create JWT Token
+            var Token = await this._jwtService.Create(User);
+            return new AuthModel
+            {
+                Message = "User Login Successfully",
+                IsAuthenticated = true,
+                Roles = new List<string> { RoleConsts.UserRole },
+                Token = Token
+            };
+        }
+
+
     }
 }
